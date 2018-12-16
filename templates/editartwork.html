@@ -1,0 +1,22 @@
+{% extends 'template.html' %}
+{% block header %}
+    Edit
+    {{editedArtPiece.title}}
+{% endblock %}
+{% block content %}
+    {% from
+    "_formhelpers.html" import render_field %}
+    <form method="post" class="form-horiztonal">
+        <dl>
+            <div class="form-group">{{ render_field(form.title) }}
+            </div>
+            <div class="form-group">{{ render_field(form.medium) }}
+            </div>
+            <div class="form-group">{{ render_field(form.size) }}
+            </div>
+            <div class="form-group">{{ render_field(form.year_created)}}</div>
+        </dl>
+        <p>
+            <input type="submit" value="Update" class="btn btn-default">
+        </form>
+    {% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'template.html' %}
+{% block header %}
+    Are you sure you want to delete
+    {{artwork.title}}?
+{% endblock %}
+{% block
+content %}
+    <form action="#" method='post' class="form-horiztonal">
+        <input type='submit' ,="," value='Delete' class="btn btn-default">
+    </form>
+    <a href='/'>
+        Cancel
+    </a>
+{% endblock %}

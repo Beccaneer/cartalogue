@@ -1,0 +1,49 @@
+{% extends 'template.html' %}
+{% block header %}
+    {% if artist %}
+        Artwork by
+        {{artist.name}}
+        {% if user_id == artist.user_id %}
+            <a href="{{url_for('newArtPiece', artist_id=artist.id)}}">
+                <i class="far fa-plus-square clickable-primary"></i>
+            </a>
+        {% endif %}
+    {% else %}
+        All artwork
+    {% endif %}
+{% endblock %}
+{% block content %}
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Medium</th>
+                <th>Size</th>
+                <th>Year created</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for art in artwork %}
+                <tr>
+                    <td>{{art.title if art.title}}</td>
+                    <td>{{art.medium if art.medium}}</td>
+                    <td>{{art.size if art.size}}</td>
+                    <td>{{art.year_created if art.year_created}}</td>
+                    {% if art.user_id == user_id %}
+                        <td class='no-top-border'>
+                            <a href="/artist/{{art.artist_id}}/artwork/{{art.id}}/edit">
+                                <i class="far fa-edit clickable-primary"></i>
+                            </a>
+                        </td>
+                        <td class='no-top-border'>
+                            <a href="/artist/{{art.artist_id}}/artwork/{{art.id}}/delete">
+                                <i class="fas fa-times clickable-primary"></i>
+                            </a>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

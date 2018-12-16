@@ -1,0 +1,55 @@
+{% extends 'template.html' %}
+{% block header %}
+    All Artists
+    {% if user_id is not none %}
+        <a href="{{url_for('newArtist')}}">
+            <i class="fas fa-user-plus clickable-primary"></i>
+        </a>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <table class="table-striped table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Born</th>
+                <th>Died</th>
+                <th>Country</th>
+                <th>Art movement</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for artist in artists %}
+                <tr>
+                    <td>{{artist.name if artist.name}}</td>
+                    <td>{{artist.year_of_birth if artist.year_of_birth}}</td>
+                    <td>{{artist.year_of_death if artist.year_of_death}}</td>
+                    <td>{{artist.country if artist.country}}</td>
+                    <td>{{artist.art_movement if artist.art_movement}}</td>
+                    <td class="no-top-border">
+                        <a href="{{url_for('showArtwork', artist_id=artist.id)}}">
+                            <i class="far fa-images clickable-primary"></i>
+                        </a>
+                    </td>
+                    {% if artist.user_id == user_id %}
+                        <td class='no-top-border'>
+                            <a href="{{url_for('newArtPiece', artist_id=artist.id)}}">
+                                <i class="far fa-image clickable-primary"></i>
+                            </a>
+                        </td>
+                        <td class='no-top-border'>
+                            <a href="{{url_for('editArtist', artist_id=artist.id)}}">
+                                <i class="far fa-edit clickable-primary"></i>
+                            </a>
+                        </td>
+                        <td class='no-top-border'>
+                            <a href="{{url_for('deleteArtist', artist_id=artist.id)}}">
+                                <i class="fas fa-times clickable-primary"></i>
+                            </a>
+                        </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
